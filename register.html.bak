@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REGISTER</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>LOGIN</title>
+        <style>
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-image: url(bg.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100vh;
+          }
+
+          .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-150%, -50%);
+            width: 400px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+          }
+
+          .box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+          }
+
+          .box .inputBox {
+            position: relative;
+          }
+
+          .box .inputBox input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+          }
+
+          .box .inputBox label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            letter-spacing: 2px;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: 0.5s;
+          }
+
+          .box .inputBox input:focus ~ label,
+          .box .inputBox input:valid ~ label {
+            top: -25px;
+            left: 0;
+            color: #fff;
+            font-size: 12px;
+          }
+          .box .login-email .input-group .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            text-align: center;
+            border: none;
+            background: #a29bfe;
+            outline: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+
+          .box .login-email .input-group .btn:hover {
+            transform: translateY(-5px);
+            background: #6c5ce7;
+          }
+          .login-register-text {
+            color: #fff;
+            font-weight: 600;
+          }
+          .login-register-text a {
+            text-decoration: none;
+            color: #6c5ce7;
+          }
+          .last {
+            color: white;
+            text-align: center;
+          }
+          .last a {
+            text-decoration: none;
+          }
+        </style>
+      </head>
+      <body bgcolor="#9cb3ce">
+        <div class="box">
+          <h2>REGISTRATION</h2>
+          <form action="register_process.php" method="POST" class="login-email">
+            <div class="inputBox">
+              <input type="text" name="username" required />
+              <label>USERNAME</label>
+            </div>
+            <div class="inputBox">
+              <input type="email" name="email" required />
+              <label>EMAIL</label>
+            </div>
+            <div class="inputBox">
+              <input type="password" name="password" required />
+              <label>PASSWORD</label>
+            </div>
+            <div class="input-group">
+              <button name="submit" class="btn">Login</button>
+            </div>
+            <div class="last">
+              <h4>Have an account ? <a href="login.html">Login</a></h4>
+            </div>
+          </form>
+        </div>
+        <script>
+// Check if the error parameter exists in the URL
+   const urlParams = new URLSearchParams(window.location.search);
+   const error = urlParams.get('error');
+   const error1 = urlParams.get('error');
+// If error parameter exists and it indicates 'exists', show an alert
+if (error === 'exists') {
+    alert('Username or email already exists');
+}
+if (error1 === 'weakpassword') {
+    alert('Create Strong Password');
+}
+</script>
+
+      </body>
+    </html>
+  </body>
+</html>

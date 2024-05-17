@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LOGIN</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>LOGIN</title>
+        <style>
+          body,
+          html {
+            height: 100%;
+            margin: 0;
+          }
+
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-image: url(bg.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100vh;
+          }
+
+          .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-150%, -50%);
+
+            width: 400px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+          }
+
+          .box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+          }
+
+          .box .inputBox {
+            position: relative;
+          }
+
+          .box .inputBox input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+          }
+
+          .box .inputBox label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            letter-spacing: 2px;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: 0.5s;
+          }
+
+          .box .inputBox input:focus ~ label,
+          .box .inputBox input:valid ~ label {
+            top: -25px;
+            left: 0;
+            color: #fff;
+            font-size: 12px;
+          }
+          .box .login-email .input-group .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            text-align: center;
+            border: none;
+            background: #a29bfe;
+            outline: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+
+          .box .login-email .input-group .btn:hover {
+            transform: translateY(-5px);
+            background: #6c5ce7;
+          }
+          .login-register-text {
+            color: #fff;
+            font-weight: 600;
+          }
+          .login-register-text a {
+            text-decoration: none;
+            color: #6c5ce7;
+          }
+          .last {
+            color: white;
+            text-align: center;
+          }
+          .last a {
+            text-decoration: none;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="box">
+          <h2>LOGIN</h2>
+          <form action="login_process.php" method="POST" class="login-email">
+            <div class="inputBox">
+              <input type="text" name="username" required />
+              <label>USERNAME</label>
+            </div>
+            <input type="hidden" name="start_time" id="start_time"/>
+            <div class="inputBox">
+              <input type="password" name="password" required />
+              <label>PASSWORD</label>
+            </div>
+            <div class="input-group">
+              <button name="submit" class="btn">Login</button>
+            </div>
+            <div class="last">
+              <h4>
+                Don't have an account ? <a href="register.html">Sign up</a>
+              </h4>
+            </div>
+          </form>
+        </div>
+      </body>
+    </html>
+  </body>
+  <script>
+    function startTimer() {
+      let current_time = document.getElementById("start_time")
+      var startTime = Math.round(Date.now() * 0.001); // Get current time in milliseconds
+      current_time.value = startTime
+      console.log(startTime)
+      sessionStorage.setItem('startTime', startTime); // Save start time in sessionStorage
+    }
+
+    // Function to stop the timer and send the value to the server
+    function stopTimerAndSendToServer() {
+      var startTime = sessionStorage.getItem('startTime'); // Retrieve start time from sessionStorage
+      var elapsedTime = Date.now() - startTime; // Calculate elapsed time
+      var seconds = Math.round(elapsedTime / 1000); // Convert milliseconds to seconds
+
+      // Send elapsed time to the server using an AJAX request
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "store_timer.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log("Timer value sent to server successfully.");
+        }
+      };
+      xhr.send(JSON.stringify({ timerValue: seconds }));
+
+      // Clear the stored start time from sessionStorage
+      sessionStorage.removeItem('startTime');
+    }
+
+    // Call the startTimer function when the page loads
+    startTimer();
+    setTimeout(function () {
+      window.location.href = "404page.html";
+   }, 60000);
+  </script> 
+</html>
